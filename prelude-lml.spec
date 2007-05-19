@@ -1,26 +1,25 @@
 %define _localstatedir %{_var}
 
 Name:           prelude-lml
-Version:        0.9.9
-Release:        %mkrel 2
+Version:        0.9.10
+Release:        %mkrel 1
 Summary:        Prelude Hybrid Intrusion Detection System - Log Analyzer Sensor
 License:        GPL
 Group:          Networking/Other
 URL:            http://www.prelude-ids.org/
-Source0:        http://www.prelude-ids.org/download/releases/%{name}-%{version}.tar.gz
-Source1:        http://www.prelude-ids.org/download/releases/%{name}-%{version}.tar.gz.sig
+Source0:        http://www.prelude-ids.org/download/releases/prelude-lml-%{version}.tar.gz
+Source1:        http://www.prelude-ids.org/download/releases/prelude-lml-%{version}.tar.gz.sig
 Source2:        prelude-lml.init
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
-BuildRequires:  automake1.8
-BuildRequires:  autoconf2.5
-BuildRequires:  libprelude-devel
-BuildRequires:  libpcre-devel
+BuildRequires:  chrpath
 BuildRequires:  libfam-devel
 BuildRequires:  libgnutls-devel
+BuildRequires:  libpcre-devel
+BuildRequires:  libprelude-devel
 Obsoletes:      prelude-nids < %{version}-%{release}
 Provides:       prelude-nids = %{version}-%{release}
-Buildroot:      %{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 The Prelude Log Monitoring Lackey (LML) is the host-based sensor program part
@@ -54,6 +53,7 @@ The devel headers.
 
 %build
 %{configure2_5x} \
+    --bindir=%{_sbindir} \
     --enable-shared \
     --enable-static \
     --enable-unsupported-rulesets \
@@ -73,6 +73,8 @@ The devel headers.
 %{__mkdir_p} %{buildroot}%{_initrddir}
 %{__cp} -a %{SOURCE2} %{buildroot}%{_initrddir}/%{name}
 
+%{_bindir}/chrpath -d %{buildroot}%{_sbindir}/prelude-lml
+
 %clean
 %{__rm} -rf %{buildroot}
 
@@ -83,23 +85,23 @@ The devel headers.
 %_preun_service %{name}
 
 %files
-%defattr(-,root,root)
+%defattr(0644,root,root,0755)
 %doc AUTHORS COPYING ChangeLog HACKING.README NEWS README
+%attr(0755,root,root) %{_sbindir}/%{name}
+%attr(0755,root,root) %{_initrddir}/%{name}
+%dir %{_libdir}/%{name}
+%attr(0755,root,root) %{_libdir}/%{name}/*.so
+%dir %{_localstatedir}/lib/%{name}
 %dir %{_sysconfdir}/%{name}
-%dir %{_sysconfdir}/%{name}/ruleset
 %attr(0640,root,root) %config(noreplace) %{_sysconfdir}/%{name}/*.rules
 %attr(0640,root,root) %config(noreplace) %{_sysconfdir}/%{name}/*.conf
+%dir %{_sysconfdir}/%{name}/ruleset
 %config(noreplace) %{_sysconfdir}/%{name}/ruleset/*.rules
-%{_bindir}/%{name}
-%dir %{_libdir}/%{name}
-%{_libdir}/%{name}/*.so
-%dir %{_localstatedir}/lib/%{name}
-%attr(0755,root,root) %{_initrddir}/%{name}
 
 %files devel
-%defattr(-,root,root)
+%defattr(0644,root,root,0755)
 %doc AUTHORS COPYING ChangeLog HACKING.README NEWS README
 %dir %{_includedir}/%{name}
 %{_includedir}/%{name}/*.h
 %{_libdir}/%{name}/*.a
-%{_libdir}/%{name}/*.la
+%attr(0755,root,root) %{_libdir}/%{name}/*.la
