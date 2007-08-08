@@ -1,7 +1,7 @@
 %define _localstatedir %{_var}
 
 Name:           prelude-lml
-Version:        0.9.10
+Version:        0.9.10.1
 Release:        %mkrel 1
 Summary:        Prelude Hybrid Intrusion Detection System - Log Analyzer Sensor
 License:        GPL
@@ -9,7 +9,10 @@ Group:          Networking/Other
 URL:            http://www.prelude-ids.org/
 Source0:        http://www.prelude-ids.org/download/releases/prelude-lml-%{version}.tar.gz
 Source1:        http://www.prelude-ids.org/download/releases/prelude-lml-%{version}.tar.gz.sig
-Source2:        prelude-lml.init
+Source2:        http://www.prelude-ids.org/download/releases/prelude-lml-%{version}.tar.gz.md5
+Source3:        http://www.prelude-ids.org/download/releases/prelude-lml-%{version}.tar.gz.sha1
+Source4:        http://www.prelude-ids.org/download/releases/prelude-lml-%{version}.txt
+Source5:        prelude-lml.init
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
 BuildRequires:  chrpath
@@ -71,7 +74,7 @@ The devel headers.
 %{__mkdir_p} %{buildroot}%{_localstatedir}/lib/%{name}
 
 %{__mkdir_p} %{buildroot}%{_initrddir}
-%{__cp} -a %{SOURCE2} %{buildroot}%{_initrddir}/%{name}
+%{__cp} -a %{SOURCE5} %{buildroot}%{_initrddir}/%{name}
 
 %{_bindir}/chrpath -d %{buildroot}%{_sbindir}/prelude-lml
 
