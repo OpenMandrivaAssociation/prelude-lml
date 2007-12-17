@@ -22,7 +22,6 @@ BuildRequires:  libpcre-devel
 BuildRequires:  libprelude-devel
 Obsoletes:      prelude-nids < %{version}-%{release}
 Provides:       prelude-nids = %{version}-%{release}
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 The Prelude Log Monitoring Lackey (LML) is the host-based sensor program part
