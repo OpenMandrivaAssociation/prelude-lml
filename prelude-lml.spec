@@ -2,7 +2,7 @@
 
 Name:           prelude-lml
 Version:        0.9.10.1
-Release:        %mkrel 2
+Release:        %mkrel 3
 Summary:        Prelude Hybrid Intrusion Detection System - Log Analyzer Sensor
 License:        GPLv2+
 Group:          Networking/Other
@@ -19,7 +19,7 @@ BuildRequires:  chrpath
 BuildRequires:  libfam-devel
 BuildRequires:  libgnutls-devel
 BuildRequires:  libpcre-devel
-BuildRequires:  libprelude-devel
+BuildRequires:  prelude-devel
 Obsoletes:      prelude-nids < %{version}-%{release}
 Provides:       prelude-nids = %{version}-%{release}
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
