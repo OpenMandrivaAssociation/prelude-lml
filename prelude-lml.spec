@@ -1,8 +1,8 @@
 %define _localstatedir %{_var}
 
 Name:           prelude-lml
-Version:        0.9.10.1
-Release:        %mkrel 3
+Version:        0.9.11
+Release:        %mkrel 1
 Summary:        Prelude Hybrid Intrusion Detection System - Log Analyzer Sensor
 License:        GPLv2+
 Group:          Networking/Other
