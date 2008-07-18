@@ -1,17 +1,17 @@
 %define _localstatedir %{_var}
 
 Name:           prelude-lml
-Version:        0.9.11
+Version:        0.9.12.2
 Release:        %mkrel 1
 Summary:        Prelude Hybrid Intrusion Detection System - Log Analyzer Sensor
 License:        GPLv2+
 Group:          Networking/Other
 URL:            http://www.prelude-ids.org/
-Source0:        http://www.prelude-ids.org/download/releases/prelude-lml-%{version}.tar.gz
-Source1:        http://www.prelude-ids.org/download/releases/prelude-lml-%{version}.tar.gz.sig
-Source2:        http://www.prelude-ids.org/download/releases/prelude-lml-%{version}.tar.gz.md5
-Source3:        http://www.prelude-ids.org/download/releases/prelude-lml-%{version}.tar.gz.sha1
-Source4:        http://www.prelude-ids.org/download/releases/prelude-lml-%{version}.txt
+Source0:        http://www.prelude-ids.org/download/releases/%name/prelude-lml-%{version}.tar.gz
+Source1:        http://www.prelude-ids.org/download/releases/%name/prelude-lml-%{version}.tar.gz.sig
+Source2:        http://www.prelude-ids.org/download/releases/%name/prelude-lml-%{version}.tar.gz.md5
+Source3:        http://www.prelude-ids.org/download/releases/%name/prelude-lml-%{version}.tar.gz.sha1
+Source4:        http://www.prelude-ids.org/download/releases/%name/prelude-lml-%{version}.txt
 Source5:        prelude-lml.init
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
