@@ -2,7 +2,7 @@
 
 Name:           prelude-lml
 Version:        0.9.15
-Release:        %mkrel 1
+Release:        %mkrel 2
 Summary:        Prelude Hybrid Intrusion Detection System - Log Analyzer Sensor
 License:        GPLv2+
 Group:          Networking/Other
