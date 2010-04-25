@@ -1,8 +1,8 @@
 %define _localstatedir %{_var}
 
 Name:           prelude-lml
-Version:        0.9.15
-Release:        %mkrel 2
+Version:        1.0.0
+Release:        %mkrel 1
 Summary:        Prelude Hybrid Intrusion Detection System - Log Analyzer Sensor
 License:        GPLv2+
 Group:          Networking/Other
@@ -16,7 +16,6 @@ Source5:        prelude-lml.init
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
 BuildRequires:  chrpath
-BuildRequires:  libfam-devel
 BuildRequires:  libgnutls-devel
 BuildRequires:  libpcre-devel
 BuildRequires:  prelude-devel
@@ -60,9 +59,7 @@ The devel headers.
     --enable-shared \
     --enable-static \
     --enable-unsupported-rulesets \
-    --enable-fam \
-    --with-libprelude-prefix=%{_prefix} \
-    --with-fam=%{_prefix}                                            
+    --with-libprelude-prefix=%{_prefix}
 %{make}
 
 %install
