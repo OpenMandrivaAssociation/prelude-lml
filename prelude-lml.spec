@@ -1,17 +1,14 @@
 %define _localstatedir %{_var}
 
 Name:           prelude-lml
-Version:        1.0.0
-Release:        %mkrel 4
+Version:        1.0.1
+Release:        0
 Summary:        Prelude Hybrid Intrusion Detection System - Log Analyzer Sensor
 License:        GPLv2+
 Group:          Networking/Other
 URL:            http://www.prelude-ids.org/
 Source0:        http://www.prelude-ids.org/download/releases/%name/prelude-lml-%{version}.tar.gz
-Source1:        http://www.prelude-ids.org/download/releases/%name/prelude-lml-%{version}.tar.gz.sig
-Source2:        http://www.prelude-ids.org/download/releases/%name/prelude-lml-%{version}.tar.gz.md5
-Source3:        http://www.prelude-ids.org/download/releases/%name/prelude-lml-%{version}.tar.gz.sha1
-Source4:        http://www.prelude-ids.org/download/releases/%name/prelude-lml-%{version}.txt
+Source1:        prelude-lml-1.0.1-missing_rules.tar.gz
 Source5:        prelude-lml.init
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
@@ -19,9 +16,6 @@ BuildRequires:  chrpath
 BuildRequires:  libgnutls-devel
 BuildRequires:  libpcre-devel
 BuildRequires:  prelude-devel
-Obsoletes:      prelude-nids < %{version}-%{release}
-Provides:       prelude-nids = %{version}-%{release}
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 The Prelude Log Monitoring Lackey (LML) is the host-based sensor program part
@@ -50,33 +44,33 @@ suspicious log entry is detected.
 The devel headers.
 
 %prep
-%setup -q
+
+%setup -q -a1
 %{__perl} -pi -e 's|/var/log/apache2|%{_logdir}/httpd|g' prelude-lml.conf.in
 
+cp %{SOURCE5} prelude-lml.init
+
 %build
-%{configure2_5x} \
+%configure2_5x \
     --bindir=%{_sbindir} \
     --enable-shared \
     --enable-static \
     --enable-unsupported-rulesets \
     --with-libprelude-prefix=%{_prefix}
-%{make}
+
+%make
 
 %install
-%{__rm} -rf %{buildroot}
-%{__mkdir_p} %{buildroot}%{_localstatedir}/%{name}
 
-%{makeinstall_std}
+install -d %{buildroot}%{_localstatedir}/%{name}
 
-%{__mkdir_p} %{buildroot}%{_localstatedir}/lib/%{name}
+%makeinstall_std
 
-%{__mkdir_p} %{buildroot}%{_initrddir}
-%{__cp} -a %{SOURCE5} %{buildroot}%{_initrddir}/%{name}
+install -d %{buildroot}%{_localstatedir}/lib/%{name}
+install -d %{buildroot}%{_initrddir}
+install -m0755 prelude-lml.init %{buildroot}%{_initrddir}/%{name}
 
 %{_bindir}/chrpath -d %{buildroot}%{_sbindir}/prelude-lml
-
-%clean
-%{__rm} -rf %{buildroot}
 
 %post
 %_post_service %{name}
@@ -85,7 +79,6 @@ The devel headers.
 %_preun_service %{name}
 
 %files
-%defattr(0644,root,root,0755)
 %doc AUTHORS COPYING ChangeLog HACKING.README NEWS README
 %attr(0755,root,root) %{_sbindir}/%{name}
 %attr(0755,root,root) %{_initrddir}/%{name}
@@ -99,7 +92,6 @@ The devel headers.
 %config(noreplace) %{_sysconfdir}/%{name}/ruleset/*.rules
 
 %files devel
-%defattr(0644,root,root,0755)
 %doc AUTHORS COPYING ChangeLog HACKING.README NEWS README
 %dir %{_includedir}/%{name}
 %{_includedir}/%{name}/*.h
