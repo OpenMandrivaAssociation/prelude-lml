@@ -13,8 +13,8 @@ Source5:        prelude-lml.init
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
 BuildRequires:  chrpath
-BuildRequires:  libgnutls-devel
-BuildRequires:  libpcre-devel
+BuildRequires:  gnutls-devel
+BuildRequires:  pcre-devel
 BuildRequires:  prelude-devel
 
 %description
