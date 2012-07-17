@@ -54,7 +54,7 @@ cp %{SOURCE5} prelude-lml.init
 %configure2_5x \
     --bindir=%{_sbindir} \
     --enable-shared \
-    --enable-static \
+    --disable-static \
     --enable-unsupported-rulesets \
     --with-libprelude-prefix=%{_prefix}
 
@@ -71,6 +71,8 @@ install -d %{buildroot}%{_initrddir}
 install -m0755 prelude-lml.init %{buildroot}%{_initrddir}/%{name}
 
 %{_bindir}/chrpath -d %{buildroot}%{_sbindir}/prelude-lml
+
+rm -f %{buildroot}%{_libdir}/%{name}/*.*a
 
 %post
 %_post_service %{name}
@@ -95,5 +97,3 @@ install -m0755 prelude-lml.init %{buildroot}%{_initrddir}/%{name}
 %doc AUTHORS COPYING ChangeLog HACKING.README NEWS README
 %dir %{_includedir}/%{name}
 %{_includedir}/%{name}/*.h
-%{_libdir}/%{name}/*.a
-%attr(0755,root,root) %{_libdir}/%{name}/*.la
