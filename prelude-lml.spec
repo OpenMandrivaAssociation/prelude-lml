@@ -1,4 +1,5 @@
 %define _localstatedir %{_var}
+%define _disable_ld_no_undefined 1
 
 Name:           prelude-lml
 Version:        1.0.1
