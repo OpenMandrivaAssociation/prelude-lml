@@ -4,7 +4,7 @@
 Summary:	Prelude Hybrid Intrusion Detection System - Log Analyzer Sensor
 Name:		prelude-lml
 Version:	1.0.1
-Release:	6
+Release:	7
 License:	GPLv2+
 Group:		Networking/Other
 Url:		http://www.prelude-ids.org/
