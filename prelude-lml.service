@@ -1,0 +1,11 @@
+[Unit]
+Description=Prelude log analyzer
+After=syslog.target network.target
+
+[Service]
+Type=forking
+PIDFile=/var/run/prelude-lml.pid
+ExecStart=/usr/sbin/prelude-lml
+
+[Install]
+WantedBy=multi-user.target
