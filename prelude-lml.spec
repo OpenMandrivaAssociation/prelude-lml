@@ -4,7 +4,7 @@
 Summary:	Prelude Hybrid Intrusion Detection System - Log Analyzer Sensor
 Name:		prelude-lml
 Version:	1.0.1
-Release:	9
+Release:	10
 License:	GPLv2+
 Group:		Networking/Other
 Url:		http://www.prelude-ids.org/
@@ -43,10 +43,13 @@ suspicious log entry is detected.
 %config(noreplace) %{_sysconfdir}/%{name}/ruleset/*.rules
 
 %post
-%_post_service %{name}
+%systemd_post %{name}.service
 
 %preun
-%_preun_service %{name}
+%systemd_preun %{name}.service
+
+%postun
+%systemd_postun_with_restart %{name}.service
 
 #----------------------------------------------------------------------------
 
