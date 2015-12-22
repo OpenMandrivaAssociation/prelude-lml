@@ -1,5 +1,6 @@
 %define _localstatedir %{_var}
 %define _disable_ld_no_undefined 1
+%define _disable_lto 1
 
 Summary:	Prelude Hybrid Intrusion Detection System - Log Analyzer Sensor
 Name:		prelude-lml
