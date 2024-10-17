@@ -8,7 +8,7 @@ Version:	1.0.1
 Release:	16
 License:	GPLv2+
 Group:		Networking/Other
-Url:		http://www.prelude-ids.org/
+Url:		https://www.prelude-ids.org/
 Source0:	%{name}-%{version}.tar.gz
 Source1:	%{name}-%{version}-missing_rules.tar.gz
 Source2:	%{name}.service
