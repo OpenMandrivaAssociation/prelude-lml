@@ -13,6 +13,11 @@ Source0:	%{name}-%{version}.tar.gz
 Source1:	%{name}-%{version}-missing_rules.tar.gz
 Source2:	%{name}.service
 Patch1:		libprelude-1.0.0-Fix-building-with-glibc-2.16.6.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	chrpath
 BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	pkgconfig(libpcre)
