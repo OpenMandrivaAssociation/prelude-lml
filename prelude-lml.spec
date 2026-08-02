@@ -4,14 +4,13 @@
 
 Summary:	Prelude Hybrid Intrusion Detection System - Log Analyzer Sensor
 Name:		prelude-lml
-Version:	1.0.1
-Release:	16
+Version:	5.2.0
+Release:	1
 License:	GPLv2+
 Group:		Networking/Other
 Url:		https://www.prelude-ids.org/
 Source0:	%{name}-%{version}.tar.gz
-Source1:	%{name}-%{version}-missing_rules.tar.gz
-Source2:	%{name}.service
+Source1:	%{name}.service
 Patch1:		libprelude-1.0.0-Fix-building-with-glibc-2.16.6.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -83,10 +82,10 @@ The devel headers.
 #----------------------------------------------------------------------------
 
 %prep
-%setup -q -a1
+%setup -q
 perl -pi -e 's|/var/log/apache2|%{_logdir}/httpd|g' prelude-lml.conf.in
-cp %{SOURCE2} %{name}.service
-%patch1 -p1
+cp %{SOURCE1} %{name}.service
+%patch -P1 -p1
 
 %build
 %configure2_5x \
